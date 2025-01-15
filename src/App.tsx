@@ -115,7 +115,7 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           <div className="lg:col-span-3 bg-white rounded-lg shadow">
             <div className="p-4 bg-gray-50 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-800">Major Earthquakes Map (M5.0+)</h2>
+              <h2 className="text-lg font-semibold text-gray-800">Earthquakes Map (M5.0+)</h2>
             </div>
             <div className="p-4">
               <Map 
@@ -125,12 +125,17 @@ function App() {
               />
             </div>
           </div>
-          <div className="lg:col-span-2">
-            <EarthquakeList 
-              earthquakes={earthquakes} 
-              selectedEarthquake={selectedEarthquake}
-              onEarthquakeSelect={setSelectedEarthquake}
-            />
+          <div className="lg:col-span-2 bg-white rounded-lg shadow">
+            <div className="p-4 bg-gray-50 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-800">Recent Earthquakes</h2>
+            </div>
+            <div className="p-4 h-[600px]">
+              <EarthquakeList 
+                earthquakes={earthquakes} 
+                selectedEarthquake={selectedEarthquake}
+                onEarthquakeSelect={setSelectedEarthquake}
+              />
+            </div>
           </div>
         </div>
       </main>
