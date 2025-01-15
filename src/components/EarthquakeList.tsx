@@ -58,44 +58,39 @@ export default function EarthquakeList({ earthquakes, selectedEarthquake, onEart
   );
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden h-full">
-      <div className="p-4 bg-gray-50 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-800">Recent Minor Earthquakes</h2>
-      </div>
-      <div className="overflow-auto max-h-[calc(100vh-200px)]">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50 sticky top-0">
-            <tr>
-              <SortHeader field="time" label="Time" />
-              <SortHeader field="place" label="Location" />
-              <SortHeader field="mag" label="Magnitude" />
+    <div className="h-full overflow-y-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50 sticky top-0">
+          <tr>
+            <SortHeader field="time" label="Time" />
+            <SortHeader field="place" label="Location" />
+            <SortHeader field="mag" label="Magnitude" />
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {sortedEarthquakes.map((earthquake) => (
+            <tr 
+              key={earthquake.id} 
+              className={`hover:bg-gray-50 cursor-pointer ${
+                selectedEarthquake === earthquake.id ? 'bg-green-50' : ''
+              }`}
+              onClick={() => onEarthquakeSelect(
+                selectedEarthquake === earthquake.id ? null : earthquake.id
+              )}
+            >
+              <td className="px-6 py-4 text-sm text-gray-500 w-[180px]">
+                {format(new Date(earthquake.properties.time), 'PPp')}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-900">
+                {earthquake.properties.place}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-900 w-[100px] text-center">
+                {earthquake.properties.mag.toFixed(1)}
+              </td>
             </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {sortedEarthquakes.map((earthquake) => (
-              <tr 
-                key={earthquake.id} 
-                className={`hover:bg-gray-50 cursor-pointer ${
-                  selectedEarthquake === earthquake.id ? 'bg-green-50' : ''
-                }`}
-                onClick={() => onEarthquakeSelect(
-                  selectedEarthquake === earthquake.id ? null : earthquake.id
-                )}
-              >
-                <td className="px-6 py-4 text-sm text-gray-500 w-[180px]">
-                  {format(new Date(earthquake.properties.time), 'PPp')}
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900">
-                  {earthquake.properties.place}
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900 w-[100px] text-center">
-                  {earthquake.properties.mag.toFixed(1)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
