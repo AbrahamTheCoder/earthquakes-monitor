@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchEarthquakes = async () => {
       try {
-        const response = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
+        const response = await fetch(import.meta.env.VITE_USG_URL)
         if (!response.ok) throw new Error('Failed to fetch earthquake data');
         const data = await response.json();
         
